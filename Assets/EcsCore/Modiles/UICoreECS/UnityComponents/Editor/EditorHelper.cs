@@ -30,7 +30,11 @@ namespace UICoreECS.Editor
                 
             };
             rList.elementHeight = EditorGUIUtility.singleLineHeight;
-            rList.elementHeightCallback = index => EditorGUI.GetPropertyHeight(rList.serializedProperty.GetArrayElementAtIndex(index)) + HEIHGHT_SPACE;
+
+            if (rList.serializedProperty.arraySize > 0)
+            {
+                rList.elementHeightCallback = index => EditorGUI.GetPropertyHeight(rList.serializedProperty.GetArrayElementAtIndex(index)) + HEIHGHT_SPACE;
+            }
             
             return rList;
         }

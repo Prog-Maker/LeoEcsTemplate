@@ -7,7 +7,7 @@ namespace Modules.Root
 {
     public class EcsStartup : MonoBehaviour
     {
-        [SerializeField, HideInInspector] private List<UnityEngine.Object> _systemProviders;
+        [SerializeField] private List<UnityEngine.Object> _systemProviders;
 
         private EcsWorld _world;
         private EcsSystems _systems;

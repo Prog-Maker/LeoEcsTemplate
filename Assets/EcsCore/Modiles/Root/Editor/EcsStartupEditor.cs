@@ -1,4 +1,5 @@
 ﻿#if UNITY_EDITOR
+using Sirenix.OdinInspector.Editor;
 using UICoreECS.Editor;
 using UnityEditor;
 using UnityEditorInternal;
@@ -6,25 +7,25 @@ using UnityEditorInternal;
 namespace Modules.Root 
 {
     [CustomEditor(typeof(EcsStartup), true)]
-    public class EcsStartupEditor : UnityEditor.Editor
+    public class EcsStartupEditor : OdinEditor
     {
-        private ReorderableList _providersList;
+        //private ReorderableList _providersList;
 
-        private void OnEnable()
-        {
-            _providersList = EditorHelper.DrawReorderableList(serializedObject, "_systemProviders", "Providers");
-        }
+        //private void OnEnable()
+        //{
+        //    _providersList = EditorHelper.DrawReorderableList(serializedObject, "_systemProviders", "Providers");
+        //}
 
-        public override void OnInspectorGUI()
-        {
-            DrawDefaultInspector();
+        //public override void OnInspectorGUI()
+        //{
+        //    DrawDefaultInspector();
             
-            EditorGUILayout.Space();
+        //    EditorGUILayout.Space();
             
-            _providersList.DoLayoutList();
+        //    _providersList.DoLayoutList();
             
-            serializedObject.ApplyModifiedProperties();
-        }
+        //    serializedObject.ApplyModifiedProperties();
+        //}
     }
 }
 #endif
