@@ -25,7 +25,13 @@ namespace Game
 
                 if (Physics.Raycast(ray, out var hit, 50f))
                 {
-                    Debug.Log(hit.collider.name);
+                    if (hit.collider.gameObject.TryGetComponent<EntityRef>(out var entityRef))
+                    {
+                        if (entityRef.Entity.IsAlive() && entityRef.Entity.Has<EnemyTag>())
+                        {
+                            entityRef.Entity.Get<DestroyTag>();
+                        }
+                    }
                 }
             }
         }

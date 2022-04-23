@@ -13,9 +13,12 @@ namespace Game
             EcsSystems systems = new EcsSystems(world, this.name);
 
             systems
+                .Add(new SpawnCubeSystem())
+                .Add(new MoveCubeSystem())
                 .Add(new TapListenSystem())
-                
-                
+                .Add(new DestroyCubeSystem())
+
+
                 ;
 
             endFrame.OneFrame<OnScreenTapDown>()

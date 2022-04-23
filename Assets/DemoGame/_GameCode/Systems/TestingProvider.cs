@@ -5,8 +5,8 @@ using UnityEngine;
 
 namespace Game
 {
-    [CreateAssetMenu(menuName = "LeoECS_SystemProviders/TestProvider", fileName = "TestProvider")]
-    public class TestProvider : ScriptableObject, ISystemsProvider
+    [CreateAssetMenu(menuName = "LeoECS_SystemProviders/TestingProvider", fileName = "TestingProvider")]
+    public class TestingProvider : ScriptableObject, ISystemsProvider
     {
         public EcsSystems GetSystems(EcsWorld world, EcsSystems endFrame, EcsSystems mainSystems)
         {
