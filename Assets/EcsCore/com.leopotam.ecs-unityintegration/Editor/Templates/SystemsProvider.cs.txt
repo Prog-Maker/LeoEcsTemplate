@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace #NS#
 {
-    [CreateAssetMenu(menuName = "LeoECS_SystemProviders/#SCRIPTNAME#Provider", fileName = "#SCRIPTNAME#Provider")]
+    [CreateAssetMenu(menuName = "LeoECS_SystemProviders/#SCRIPTNAME#", fileName = "#SCRIPTNAME#")]
     public class #SCRIPTNAME# : ScriptableObject, ISystemsProvider
     {
         public EcsSystems GetSystems(EcsWorld world, EcsSystems endFrame, EcsSystems mainSystems)
