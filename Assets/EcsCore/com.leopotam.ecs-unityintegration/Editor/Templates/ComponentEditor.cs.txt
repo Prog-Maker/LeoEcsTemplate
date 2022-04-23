@@ -1,0 +1,26 @@
+﻿using Game;
+using System;
+using UnityEditor;
+
+namespace #NS#
+{
+    public class #SCRIPTNAME#Editor : IEcsComponentInspector
+    {
+        public Type GetFieldType()
+        {
+            return typeof(#SCRIPTNAME#);
+        }
+
+        void  IEcsComponentInspector.OnGUI (string label, object value, EcsWorld world, ref EcsEntity entityId)
+        {
+            var component = (#SCRIPTNAME#)value;
+            EditorGUILayout.LabelField(label, EditorStyles.boldLabel);
+            EditorGUI.indentLevel++;
+            component.Value =  EditorGUILayout.FloatField ("Value", component.Value);
+            component.SpeedVector =  EditorGUILayout.Vector3Field ("SpeedAsVector", component.SpeedVector);
+            EditorGUI.indentLevel--;
+
+            entityId.Get<#SCRIPTNAME#>() = component;
+        }
+    }
+}

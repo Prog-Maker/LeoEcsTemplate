@@ -1,0 +1,6 @@
+﻿using Leopotam.Ecs;
+
+namespace #NS# 
+{
+    public class #SCRIPTNAME#Provider : MonoProvider<#SCRIPTNAME#> { }
+}

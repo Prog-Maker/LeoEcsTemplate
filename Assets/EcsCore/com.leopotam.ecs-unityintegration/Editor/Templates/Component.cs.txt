@@ -1,0 +1,8 @@
+﻿namespace #NS# 
+{
+    [System.Serializable]
+    public struct #SCRIPTNAME# 
+    {
+        // add your data here.
+    }
+}
