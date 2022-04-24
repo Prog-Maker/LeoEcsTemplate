@@ -1,4 +1,5 @@
-﻿using Leopotam.Ecs;
+﻿using Game;
+using Leopotam.Ecs;
 using UnityEngine;
 
 namespace Modules.UserInput
@@ -6,12 +7,10 @@ namespace Modules.UserInput
     /// <summary>
     /// counts pointer displacement
     /// </summary>
-    public class PointerDisplacementSystem : IEcsRunSystem
+    public class PointerDisplacementSystem : BaseSystem
     {
         // auto injected
-        readonly EcsFilter<OnScreenHold> _hold;
-        readonly EcsFilter<OnScreenTapUp> _up;
-        readonly EcsFilter<OnScreenTapDown> _down;
+        readonly EcsFilter<EventScreenHold> _hold;
 
         readonly float _minToDrag; 
 
@@ -25,9 +24,9 @@ namespace Modules.UserInput
             _minToDrag = minToDrag;
         }
 
-        public void Run() 
+        public override void Run() 
         {
-            if (!_down.IsEmpty()) 
+            if (CheckEvent<EventScreenTapDown>()) 
             {
                 // reset
                 prevX = Input.mousePosition.x / Screen.width;
@@ -36,7 +35,7 @@ namespace Modules.UserInput
                 downY = prevY;
             }
 
-            if (!_hold.IsEmpty()) 
+            if (CheckEvent<EventScreenHold>())
             {
                 foreach (var i in _hold)
                 {
@@ -59,7 +58,7 @@ namespace Modules.UserInput
                 prevY = Input.mousePosition.y / Screen.height;
             }
 
-            if (!_up.IsEmpty()) 
+            if (!CheckEvent<EventScreenTapUp>())
             {
                 // reset
                 prevX = Input.mousePosition.x / Screen.width;

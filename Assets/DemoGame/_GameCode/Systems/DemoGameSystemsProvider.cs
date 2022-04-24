@@ -22,7 +22,7 @@ namespace Game
                 ;
 
             endFrame
-                .OneFrame<OnScreenTapDown>()
+                .OneFrame<EventScreenTapDown>()
                 ;
 
             return systems;

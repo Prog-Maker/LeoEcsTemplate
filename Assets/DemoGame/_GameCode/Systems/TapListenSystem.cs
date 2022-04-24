@@ -4,12 +4,8 @@ using UnityEngine;
 
 namespace Game
 {
-    sealed class TapListenSystem : IEcsRunSystem, IEcsInitSystem
+    sealed class TapListenSystem : BaseSystem, IEcsInitSystem
     {
-        // auto-injected fields.
-        readonly EcsWorld _world = null;
-        EcsFilter<OnScreenTapDown> _filter;
-
         private Camera _cam;
 
         public void Init()
@@ -17,23 +13,24 @@ namespace Game
             _cam = Camera.main;
         }
 
-        void IEcsRunSystem.Run()
+        public override void Run()
         {
-            if (!_filter.IsEmpty())
-            {
-                var ray = _cam.ScreenPointToRay(Input.mousePosition);
+            if (!CheckEvent<EventScreenTapDown>())
+                return;
 
-                if (Physics.Raycast(ray, out var hit, 50f))
+            var ray = _cam.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out var hit, 50f))
+            {
+                if (hit.collider.gameObject.TryGetComponent<EntityRef>(out var entityRef))
                 {
-                    if (hit.collider.gameObject.TryGetComponent<EntityRef>(out var entityRef))
+                    if (entityRef.Entity.IsAlive() && entityRef.Entity.Has<EnemyTag>())
                     {
-                        if (entityRef.Entity.IsAlive() && entityRef.Entity.Has<EnemyTag>())
-                        {
-                            entityRef.Entity.Get<DestroyTag>();
-                        }
+                        entityRef.Entity.Get<DestroyTag>();
                     }
                 }
             }
         }
+
     }
 }

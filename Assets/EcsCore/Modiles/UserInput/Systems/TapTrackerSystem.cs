@@ -1,18 +1,48 @@
-using Leopotam.Ecs;
+using Game;
 using UnityEngine;
 
 namespace Modules.UserInput
 {
-    public sealed class TapTrackerSystem : IEcsRunSystem
+    public struct EventScreenTapDown {}
+    public struct EventScreenTapUp {}
+    public struct EventScreenHold
     {
-        private EcsFilter<OnScreenTapUp> _up;
-        private EcsFilter<OnScreenTapDown> _down;
+        // normalised displacement counted by pointer displacement system
+        public float XDisplacement;
+        public float YDisplacement;
+        public bool DragStarted;
+    }
 
-        private EcsWorld _ecsWorld;
-        private EcsFilter<OnScreenHold> _filter;
-
-        public void Run()
+    public sealed class TapTrackerSystem : BaseSystem
+    {
+        public override void Run()
         {
+            if (Input.GetMouseButtonUp(0))
+                CreateEvent<EventScreenTapUp>();
+            else
+                RemoveEvent<EventScreenTapUp>();
+            
+            if (Input.GetMouseButtonDown(0))
+                CreateEvent<EventScreenTapDown>();
+            else
+                RemoveEvent<EventScreenTapDown>();
+
+            if (Input.GetMouseButton(0))
+                CreateEvent<EventScreenHold>();
+            else
+                RemoveEvent<EventScreenHold>();
+        }
+    }
+}
+
+
+
+
+
+
+
+
+/*
             if (!_up.IsEmpty())
             {
                 foreach (var i in _up)
@@ -33,24 +63,28 @@ namespace Modules.UserInput
                     _up.GetEntity(i).Del<OnScreenTapUp>();
                 }
             }
+*/
 
+/*
             if (Input.GetMouseButtonDown(0) && _down.IsEmpty())
             {
-                _ecsWorld.NewEntity().Get<OnScreenTapDown>();
+                _ecsWorld.NewEntity().Get<EventScreenTapDown>();
 
             }
             else if (!_down.IsEmpty())
             {
                 foreach (var i in _down)
                 {
-                    _down.GetEntity(i).Del<OnScreenTapDown>();
+                    _down.GetEntity(i).Del<EventScreenTapDown>();
                 }
             }
+*/
 
+/*            
             if (Input.GetMouseButton(0))
             {
                 if (_filter.IsEmpty())
-                    _ecsWorld.NewEntity().Get<OnScreenHold>();
+                    _ecsWorld.NewEntity().Get<EventScreenHold>();
             }
             else
             {
@@ -62,6 +96,4 @@ namespace Modules.UserInput
                     }
                 }
             }
-        }
-    }
-}
+*/            

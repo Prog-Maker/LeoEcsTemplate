@@ -1,11 +1,14 @@
 using System;
 using Leopotam.Ecs;
+using Modules.UserInput;
 using UnityEngine;
 
 namespace Game
 {
     public class BaseSystem : IEcsRunSystem
     {
+        public EcsWorld _ecsWorld;
+        
         public virtual void Run()
         {
         }
@@ -62,5 +65,41 @@ namespace Game
         {
             
         }
+
+        public void CreateEvent<T>() where T : struct
+        {
+            EcsFilter ecsFilter = _ecsWorld.GetFilter(typeof(EcsFilter<T>));
+            
+            if (ecsFilter.IsEmpty())
+            {
+                _ecsWorld.NewEntity().Get<T>();
+            }
+        }
+
+        public void RemoveEvent<T>() where T : struct
+        {
+            EcsFilter ecsFilter = _ecsWorld.GetFilter(typeof(EcsFilter<T>));
+
+            if (ecsFilter.IsEmpty())
+                return;
+            
+            foreach (var i in ecsFilter)
+            {
+                ecsFilter.GetEntity(i).Del<T>();
+            }
+        }
+        
+        public bool CheckEvent<T>() where T : struct
+        {
+            EcsFilter ecsFilter = _ecsWorld.GetFilter(typeof(EcsFilter<T>));
+            return !ecsFilter.IsEmpty();
+        }
+
+        public EcsFilter GetFilter<T>() where T : struct
+        {
+            EcsFilter ecsFilter = _ecsWorld.GetFilter(typeof(EcsFilter<T>));
+            return ecsFilter;
+        }
+
     }
 }

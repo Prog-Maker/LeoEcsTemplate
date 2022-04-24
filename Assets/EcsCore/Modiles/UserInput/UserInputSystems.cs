@@ -14,6 +14,7 @@ namespace Modules.UserInput
             EcsSystems systems = new EcsSystems(world, this.name);
 
             systems
+                .Add(new Events())
                 .Add(new TapTrackerSystem())
                 .Add(new PointerDisplacementSystem(_minToDrag))       // count displacement
                 ;
