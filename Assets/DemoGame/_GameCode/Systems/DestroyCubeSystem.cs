@@ -3,22 +3,19 @@ using UnityEngine;
 
 namespace Game
 {
-    public class DestroyCubeSystem : IEcsRunSystem
+    public class DestroyCubeSystem : BaseSystem
     {
         EcsFilter<EnemyTag, DestroyTag, UnityViewComponent> _filterEnemiesToDestroy;
-        
-        void IEcsRunSystem.Run()
+
+        public override void Run()
         {
-            foreach (var enemy in _filterEnemiesToDestroy)
-            {
-                var entity = _filterEnemiesToDestroy.GetEntity(enemy);
+            RunFilter<UnityViewComponent>(_filterEnemiesToDestroy, DestroyEnemy);
+        }
 
-                ref var view = ref entity.Get<UnityViewComponent>();
-
-                Object.Destroy(view.GameObject);
-
-                entity.Destroy();
-            }
+        private void DestroyEnemy(UnityViewComponent obj, EcsEntity entity)
+        {
+            Object.Destroy(obj.GameObject);
+            entity.Destroy();
         }
     }
 }

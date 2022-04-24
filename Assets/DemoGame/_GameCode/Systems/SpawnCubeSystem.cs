@@ -21,11 +21,11 @@ namespace Game
             }
         }
 
-        private void Spawn(SpawnerAnyObject entitySpawner)
+        private void Spawn(SpawnerAnyObject spawnerObject)
         {
             int index = Random.Range(0, _spawnPoints.GetEntitiesCount());
             var point = GetObject<SpawnPoint>(_spawnPoints, index);
-            var cube = Object.Instantiate(entitySpawner.Prefab, point.Transform.position, Quaternion.identity, entitySpawner.ParentToSpawn);
+            var cube = Object.Instantiate(spawnerObject.Prefab, point.Transform.position, Quaternion.identity, spawnerObject.ParentToSpawn);
         }
     }
 }
