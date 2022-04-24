@@ -12,7 +12,7 @@ namespace Game
             RunFilter<UnityViewComponent>(_filterEnemiesToDestroy, DestroyEnemy);
         }
 
-        private void DestroyEnemy(UnityViewComponent obj, EcsEntity entity)
+        private void DestroyEnemy(ref UnityViewComponent obj, ref EcsEntity entity)
         {
             Object.Destroy(obj.GameObject);
             entity.Destroy();

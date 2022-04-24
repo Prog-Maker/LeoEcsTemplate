@@ -8,50 +8,39 @@ namespace Game
     public class BaseSystem : IEcsRunSystem
     {
         public EcsWorld _ecsWorld;
+
+        public delegate void ActionRef<T>(ref T component);
+        public delegate void ActionEntityRef<EcsEntity>(ref EcsEntity entity);
+        public delegate void ActionEntityRef2<T, EcsEntity>(ref T component, ref EcsEntity entity);
         
         public virtual void Run()
         {
         }
 
-        public void RunFilter(EcsFilter filter, Action<EcsEntity> action)
+        public void RunFilter(EcsFilter filter, ActionEntityRef<EcsEntity> actionEntity)
         {
             foreach (int i in filter)
             {
                 ref var entity =  ref filter.GetEntity(i);
-                action(entity);
+                actionEntity(ref entity);
             }
         }
 
-        public void RunFilter<T>(EcsFilter filter, int index, Action<T> action) where T : struct
-        {
-            ref var entity = ref filter.GetEntity(index);
-            action(entity.Get<T>());
-        }
-
-        public void RunFilter<T>(EcsFilter filter, Action<T> action) where T : struct
+        public void RunFilter<T>(EcsFilter filter, ActionRef<T> action) where T : struct 
         {
             foreach (int i in filter)
             {
                 ref var entity =  ref filter.GetEntity(i);
-                action(entity.Get<T>());
+                action(ref entity.Get<T>());
             }
         }
 
-        public void RunFilter<T>(EcsFilter filter, Action<T, EcsEntity> action) where T : struct
+        public void RunFilter<T>(EcsFilter filter, ActionEntityRef2<T, EcsEntity> action) where T : struct
         {
             foreach (int i in filter)
             {
-                ref var entity =  ref filter.GetEntity(i);
-                action(entity.Get<T>(), entity);
-            }
-        }
-
-        public void RunFilter<T1, T2>(EcsFilter filter, Action<T1, T2> action) where T1 : struct where T2 : struct
-        {
-            foreach (int i in filter)
-            {
-                ref var entity =  ref filter.GetEntity(i);
-                action(entity.Get<T1>(), entity.Get<T2>());
+                ref var entity = ref filter.GetEntity(i);
+                action(ref entity.Get<T>(), ref entity);
             }
         }
 

@@ -21,7 +21,7 @@ namespace Game
             }
         }
 
-        private void Spawn(SpawnerAnyObject spawnerObject)
+        private void Spawn(ref SpawnerAnyObject spawnerObject)
         {
             int index = Random.Range(0, _spawnPoints.GetEntitiesCount());
             var point = GetObject<SpawnPoint>(_spawnPoints, index);
