@@ -5,11 +5,27 @@ using System.Reflection;
 
 namespace Game
 {
-    public static class AppDomainExtension 
+    public static class AppDomainExtension
     {
         public static Type[] GetAllTypes(this AppDomain appDomain)
         {
             return appDomain.GetAssemblies().GetAllTypes();
+        }
+
+        public static Type[] GetAllTypes(this Assembly assembly)
+        {
+            List<Type> list = new List<Type>();
+
+            try
+            {
+                list.AddRange(assembly.GetTypes());
+            }
+            catch (ReflectionTypeLoadException ex)
+            {
+                list.AddRange(ex.Types.Where((Type type) => (object)type != null));
+            }
+
+            return list.ToArray();
         }
 
         public static Type[] GetAllTypes(this IEnumerable<Assembly> assemblies)

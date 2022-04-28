@@ -6,8 +6,6 @@ namespace Game
 {
     sealed class TapListenSystem : IEcsRunSystem, IEcsInitSystem
     {
-        // auto-injected fields.
-        readonly EcsWorld _world = null;
         EcsFilter<OnScreenTapDown> _filter;
 
         private Camera _cam;

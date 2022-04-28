@@ -17,17 +17,18 @@ namespace Game
         [HideInInspector] public EcsEntity Entity;
         [HideInInspector] public bool IsNull = true;
 
-        public EcsEntity InnerEntity;
-        public EcsWorld World;
+        private bool _isNotEmpty => _components != null;
+        private bool _typeIsNotNull => _typeName != null;
 
         [PropertyOrder(-2)]
-        [ValueDropdown("GetTypes", IsUniqueList = true)]
-        public List<string> Components;
-
+        [ShowIf("_isNotEmpty")]
         [ShowInInspector]
+        [SerializeReference]
+        [ListDrawerSettings(DraggableItems = false)]
+        [ValueDropdown("GetTypes", IsUniqueList = true)]
         private List<object> _components = new List<object>();
 
-        private List<ComponentInfoView> _listComponents = new List<ComponentInfoView>();
+        private List<ComponentInfoViewRuntime> _listComponents = new List<ComponentInfoViewRuntime>();
 
         private void Start()
         {
@@ -36,51 +37,76 @@ namespace Game
             view.GameObject = gameObject;
             view.Transform = transform;
 
-            foreach (var c in Components)
+            foreach (var obj in _components)
             {
-                var obj = Activator.CreateInstance(Type.GetType(c));
                 var action = EcsComponentTypesKeeper.GetReplaceAction(obj.GetType().FullName);
                 action?.Invoke(Entity, obj);
             }
-            _components = ComponentsOnEntityInEditor();
+
+            _components.Clear();
+            _components = null;
 
             IsNull = false;
         }
 
-        private static string[] GetTypes
+        private static object[] GetTypes
         {
             get
             {
-                var types = AppDomainExtension.GetAllTypes(AppDomain.CurrentDomain);
-                var allTypes = AppDomain.CurrentDomain.GetAssemblies().GetAllTypes();
-                string[] strings = null;
+                //var types = AppDomainExtension.GetAllTypes(AppDomain.CurrentDomain);
+                // var allTypes = AppDomain.CurrentDomain.GetAssemblies().GetAllTypes();
+
+                var assembly = AppDomain.CurrentDomain.Load("Assembly-CSharp");
+                var allTypes = assembly.GetAllTypes();
+
+                object[] result = null;
 
                 Type[] typesStruct =  allTypes.Where(type => type.IsValueType && !type.IsAbstract && type.Namespace == "Game").ToArray();
 
-                //return typesStruct;
-                strings = new string[typesStruct.Length];
+                result = new object[typesStruct.Length];
 
-                for (int i = 0; i < typesStruct.Length; i++)
+                int i = 0;
+                foreach (var type in typesStruct)
                 {
-                    strings[i] = typesStruct[i].FullName;
+                    result[i] = Activator.CreateInstance(type);
+                    i++;
                 }
 
-                return strings;
+                return result;
             }
+        }
+
+        private List<string> GetTypeNames()
+        {
+            var types = GetTypes;
+
+            List<string> result = new List<string>();
+
+            foreach (var t in types)
+            {
+                result.Add(t.GetType().FullName);
+            }
+
+            if (Application.isPlaying)
+            {
+                var objOnEntity = ComponentsOnEntityInRuntime();
+
+                foreach (var o in objOnEntity)
+                {
+                    if (result.Contains(o.GetType().FullName))
+                    {
+                        result.Remove(o.GetType().FullName);
+                    }
+                }
+            }
+
+            return result;
         }
 
         private List<object> ComponentsOnEntityInRuntime()
         {
             object[] objects = null;
             Entity.GetComponentValues(ref objects);
-
-            return objects.ToList();
-        }
-
-        private List<object> ComponentsOnEntityInEditor()
-        {
-            object[] objects = null;
-            InnerEntity.GetComponentValues(ref objects);
 
             return objects.ToList();
         }
@@ -93,7 +119,7 @@ namespace Game
             {
                 var action = EcsComponentTypesKeeper.GetReplaceAction(obj.GetType().FullName);
 
-                _listComponents.Add(new ComponentInfoView()
+                _listComponents.Add(new ComponentInfoViewRuntime()
                 {
                     Data = obj,
                     _entity = this.Entity,
@@ -102,22 +128,27 @@ namespace Game
             }
         }
 
-        private void SetListInEditor()
+        private void UpdateComponentsList()
         {
-            var objs = ComponentsOnEntityInEditor();
-
-            foreach (var obj in objs)
+            if (Entity.IsAlive())
             {
-                var action = EcsComponentTypesKeeper.GetReplaceAction(obj.GetType().FullName);
+                var action = EcsComponentTypesKeeper.GetReplaceAction(_typeName);
+                var obj = Activator.CreateInstance(Type.GetType(_typeName));
 
-                _listComponents.Add(new ComponentInfoView()
-                {
-                    Data = obj,
-                    _entity = this.InnerEntity,
-                    _replaceAction = action
-                });
+                if (obj != null)
+                    action?.Invoke(Entity, obj);
+
+                _typeName = null;
             }
         }
+
+        [HideIf("_isNotEmpty")]
+        [ValueDropdown("GetTypeNames")]
+        [PropertyOrder(0)]
+        [ShowInInspector]
+        [LabelText("Add Component")]
+        [InlineButton("UpdateComponentsList", "+", ShowIf ="_typeIsNotNull")]
+        private string _typeName = null;
 
         [ReadOnly]
         [ShowInInspector]
@@ -127,14 +158,13 @@ namespace Game
             get { return Entity.GetInternalId().ToString(); }
         }
 
-
         [DisableContextMenu]
         [PropertySpace]
         [ShowInInspector]
         [HideReferenceObjectPicker]
         [PropertyOrder(-1)]
         [ListDrawerSettings(DraggableItems = false, HideAddButton = true, HideRemoveButton = true)]
-        private List<ComponentInfoView> ComponetsOnEntity
+        private List<ComponentInfoViewRuntime> ComponetsOnEntity
         {
             get
             {
@@ -146,7 +176,6 @@ namespace Game
                 else
                 {
                     _listComponents.Clear();
-                    SetListInEditor();
                 }
 
                 return _listComponents;
@@ -154,26 +183,30 @@ namespace Game
             set { }
         }
 
-
-        [System.Serializable]
+        [Serializable]
         [InlineProperty]
         [HideReferenceObjectPicker]
         [HideLabel]
-        public struct ComponentInfoView
+        public struct ComponentInfoViewRuntime
         {
             private object _component;
-            internal System.Action<EcsEntity, object> _replaceAction;
+            internal Action<EcsEntity, object> _replaceAction;
             internal EcsEntity _entity;
+
+            internal bool notUnityViewComponent => _component.GetType() != typeof(UnityViewComponent);
 
             [HideLabel]
             [DisplayAsString(false)]
             [ShowInInspector]
+            [GUIColor(0, 1, 0)]
             internal string TypeName => _component.GetType().Name;
 
+            [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
             [DisableContextMenu]
             [HideLabel]
             [ShowInInspector]
             [HideReferenceObjectPicker]
+            [InlineButton("Del", "-", ShowIf = "notUnityViewComponent")]
             public object Data
             {
                 get
@@ -182,67 +215,28 @@ namespace Game
                 }
                 set
                 {
-                    _component = value;
-
-                    if (_component != null)
+                    if (Application.isPlaying)
                     {
-                        _replaceAction?.Invoke(this._entity, _component);
+                        _component = value;
+
+                        if (_component != null)
+                        {
+                            _replaceAction?.Invoke(this._entity, _component);
+                        }
                     }
                 }
             }
-        }
-    }
 
-    [CustomEditor(typeof(EntityView))]
-    public class EntityViewEditor : OdinEditor
-    {
-        private EntityView _entityView;
-        private EcsWorld _world;
-
-        public override void OnInspectorGUI()
-        {
-            base.OnInspectorGUI();
-        }
-
-        protected override void OnEnable()
-        {
-            _entityView = (EntityView)target;
-
-            Debug.Log("Entity is Alive - " + _entityView.InnerEntity.IsAlive());
-            Debug.Log("World not null - " + _entityView.World != null);
-
-            if (_entityView.World == null)
+            private void Del()
             {
-                var sceneWorld = FindObjectOfType<SceneWorld>();
-                if (sceneWorld)
-                {
-                    _entityView.World = sceneWorld.EditorWorld;
-                }
-                else
-                {
-                    sceneWorld = new GameObject().AddComponent<SceneWorld>();
-                    sceneWorld.EditorWorld = new EcsWorld();
-                    _entityView.World = sceneWorld.EditorWorld;
-                }
+                _entity.Del(_component.GetType().FullName);
             }
 
-            if (!_entityView.InnerEntity.IsAlive())
+            private static Color GetButtonColor()
             {
-                _entityView.InnerEntity = _entityView.World.NewEntity();
-                ref var view =  ref _entityView.InnerEntity.Get<UnityViewComponent>();
-                view.GameObject = _entityView.gameObject;
-                view.Transform = _entityView.transform;
+                Sirenix.Utilities.Editor.GUIHelper.RequestRepaint();
+                return Color.HSVToRGB(Mathf.Cos((float)UnityEditor.EditorApplication.timeSinceStartup + 1f) * 0.225f + 0.325f, 1, 1);
             }
-        }
-    }
-
-    public static class EntityViewDataKeeper
-    {
-        public static EcsWorld EditorWorld;
-
-        static EntityViewDataKeeper()
-        {
-            EditorWorld = new EcsWorld();
         }
     }
 }

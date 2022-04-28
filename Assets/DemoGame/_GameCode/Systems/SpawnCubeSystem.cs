@@ -7,6 +7,7 @@ namespace Game
     {
         EcsFilter<SpawnerAnyObject> _spawner = null;
         EcsFilter<SpawnPoint> _spawnPoints = null;
+        EcsFilter<Player> _player = null;
 
         float _timer = 0;
 

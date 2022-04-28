@@ -132,13 +132,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 212710140}
-  - component: {fileID: 212710143}
-  - component: {fileID: 212710142}
   - component: {fileID: 212710141}
   m_Layer: 0
   m_Name: Point (1)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -166,37 +164,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 212710139}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4c71ed2948cfbf4cb77b2ca265e2a7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _ComponentFields:
-    Transform: {fileID: 212710140}
---- !u!114 &212710142
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 212710139}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbda58328ed259f4fa740c6fbc1bfd12, type: 3}
+  m_Script: {fileID: 11500000, guid: e3265cc1a1b20e3419ef218a9a88b5b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IsNull: 1
---- !u!114 &212710143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 212710139}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 863c7f7460b2b49abb4fa9a7ff9cb180, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ConvertMode: 0
+  _components:
+  - rid: 6330952317805789193
+  references:
+    version: 2
+    RefIds:
+    - rid: 6330952317805789193
+      type: {class: SpawnPoint, ns: Game, asm: Assembly-CSharp}
+      data:
+        Transform: {fileID: 212710140}
 --- !u!1 &239844262
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,6 +186,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 239844266}
+  - component: {fileID: 239844268}
+  - component: {fileID: 239844267}
   m_Layer: 0
   m_Name: DemoLevel
   m_TagString: Untagged
@@ -230,9 +212,47 @@ Transform:
   - {fileID: 212710140}
   - {fileID: 422956672}
   - {fileID: 1800231511}
+  - {fileID: 578513856}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &239844267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239844262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3265cc1a1b20e3419ef218a9a88b5b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsNull: 1
+  _components:
+  - rid: 6330952317805789186
+  - rid: 6330952317805789197
+  references:
+    version: 2
+    RefIds:
+    - rid: 6330952317805789186
+      type: {class: SpeedComponent, ns: Game, asm: Assembly-CSharp}
+      data:
+        SpeedValue: 0.5
+    - rid: 6330952317805789197
+      type: {class: Movable, ns: Game, asm: Assembly-CSharp}
+--- !u!114 &239844268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239844262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb86859428142ad498f0661f991407c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &318457362
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,13 +262,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 318457363}
-  - component: {fileID: 318457366}
-  - component: {fileID: 318457365}
   - component: {fileID: 318457364}
   m_Layer: 0
   m_Name: Point
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -276,37 +294,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 318457362}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4c71ed2948cfbf4cb77b2ca265e2a7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _ComponentFields:
-    Transform: {fileID: 318457363}
---- !u!114 &318457365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 318457362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbda58328ed259f4fa740c6fbc1bfd12, type: 3}
+  m_Script: {fileID: 11500000, guid: e3265cc1a1b20e3419ef218a9a88b5b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IsNull: 1
---- !u!114 &318457366
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 318457362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 863c7f7460b2b49abb4fa9a7ff9cb180, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ConvertMode: 0
+  _components:
+  - rid: 6330952317805789192
+  references:
+    version: 2
+    RefIds:
+    - rid: 6330952317805789192
+      type: {class: SpawnPoint, ns: Game, asm: Assembly-CSharp}
+      data:
+        Transform: {fileID: 318457363}
 --- !u!1 &422956671
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,13 +316,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 422956672}
-  - component: {fileID: 422956675}
-  - component: {fileID: 422956674}
   - component: {fileID: 422956673}
   m_Layer: 0
   m_Name: Point (2)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -350,37 +348,73 @@ MonoBehaviour:
   m_GameObject: {fileID: 422956671}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4c71ed2948cfbf4cb77b2ca265e2a7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _ComponentFields:
-    Transform: {fileID: 422956672}
---- !u!114 &422956674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 422956671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbda58328ed259f4fa740c6fbc1bfd12, type: 3}
+  m_Script: {fileID: 11500000, guid: e3265cc1a1b20e3419ef218a9a88b5b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IsNull: 1
---- !u!114 &422956675
+  _components:
+  - rid: 6330952317805789194
+  references:
+    version: 2
+    RefIds:
+    - rid: 6330952317805789194
+      type: {class: SpawnPoint, ns: Game, asm: Assembly-CSharp}
+      data:
+        Transform: {fileID: 422956672}
+--- !u!1 &578513855
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 578513856}
+  - component: {fileID: 578513857}
+  m_Layer: 0
+  m_Name: Point (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &578513856
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 578513855}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.04, y: 11.1, z: 5.15}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 239844266}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &578513857
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 422956671}
+  m_GameObject: {fileID: 578513855}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 863c7f7460b2b49abb4fa9a7ff9cb180, type: 3}
+  m_Script: {fileID: 11500000, guid: e3265cc1a1b20e3419ef218a9a88b5b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ConvertMode: 0
+  IsNull: 1
+  _components:
+  - rid: 6330952317805789196
+  references:
+    version: 2
+    RefIds:
+    - rid: 6330952317805789196
+      type: {class: SpawnPoint, ns: Game, asm: Assembly-CSharp}
+      data:
+        Transform: {fileID: 578513856}
 --- !u!1 &625590680
 GameObject:
   m_ObjectHideFlags: 0
@@ -745,13 +779,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800231511}
-  - component: {fileID: 1800231514}
-  - component: {fileID: 1800231513}
   - component: {fileID: 1800231512}
   m_Layer: 0
   m_Name: Point (3)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -779,34 +811,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1800231510}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4c71ed2948cfbf4cb77b2ca265e2a7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _ComponentFields:
-    Transform: {fileID: 1800231511}
---- !u!114 &1800231513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1800231510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbda58328ed259f4fa740c6fbc1bfd12, type: 3}
+  m_Script: {fileID: 11500000, guid: e3265cc1a1b20e3419ef218a9a88b5b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IsNull: 1
---- !u!114 &1800231514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1800231510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 863c7f7460b2b49abb4fa9a7ff9cb180, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ConvertMode: 0
+  _components:
+  - rid: 6330952317805789195
+  references:
+    version: 2
+    RefIds:
+    - rid: 6330952317805789195
+      type: {class: SpawnPoint, ns: Game, asm: Assembly-CSharp}
+      data:
+        Transform: {fileID: 1800231511}
