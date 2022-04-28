@@ -12,7 +12,7 @@ namespace Modules.Root
         private EcsWorld _world;
         private EcsSystems _systems;
 
-        void OnEnable()
+        void Awake()
         {
             // Application.targetFrameRate = 60;
 

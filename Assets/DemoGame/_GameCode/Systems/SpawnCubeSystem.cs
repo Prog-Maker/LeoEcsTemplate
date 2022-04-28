@@ -5,8 +5,8 @@ namespace Game
 {
     public class SpawnCubeSystem : IEcsRunSystem
     {
-        private EcsFilter<SpawnerAnyObject> _spawner;
-        private EcsFilter<SpawnPoint> _spawnPoints;
+        EcsFilter<SpawnerAnyObject> _spawner = null;
+        EcsFilter<SpawnPoint> _spawnPoints = null;
 
         float _timer = 0;
 
@@ -18,15 +18,21 @@ namespace Game
             {
                 _timer = 0;
 
-                foreach (var sp in _spawner)
-                {
-                    ref var entitySpawner =  ref _spawner.GetEntity(sp).Get<SpawnerAnyObject>();
-
-                    ref var point =  ref _spawnPoints.GetEntity(Random.Range(0, _spawnPoints.GetEntitiesCount())).Get<SpawnPoint>();
-
-                    var cube = Object.Instantiate(entitySpawner.Prefab, point.Transform.position, Quaternion.identity, entitySpawner.ParentToSpawn);
-                }
+                _spawner.ForEach(ActionWithEntity);
             }
+        }
+
+        private void ActionWithComponent(ref SpawnerAnyObject entitySpawner)
+        {
+            ref var point =  ref _spawnPoints.GetEntity(Random.Range(0, _spawnPoints.GetEntitiesCount())).Get<SpawnPoint>();
+            var cube = Object.Instantiate(entitySpawner.Prefab, point.Transform.position, Quaternion.identity, entitySpawner.ParentToSpawn);
+        }
+
+        private void ActionWithEntity(ref EcsEntity entity)
+        {
+            ref var entitySpawner = ref entity.Get<SpawnerAnyObject>();
+            ref var point =  ref _spawnPoints.GetEntity(Random.Range(0, _spawnPoints.GetEntitiesCount())).Get<SpawnPoint>();
+            var cube = Object.Instantiate(entitySpawner.Prefab, point.Transform.position, Quaternion.identity, entitySpawner.ParentToSpawn);
         }
     }
 }

@@ -59,9 +59,8 @@ namespace Leopotam.Ecs
             IsIgnoreInFilter = typeof(IEcsIgnoreInFilter).IsAssignableFrom(Type);
             IsAutoReset = typeof(IEcsAutoReset<T>).IsAssignableFrom(Type);
 
-#if UNITY_EDITOR
             EcsComponentTypesKeeper.Add(TypeIndex, Type.FullName, (entity, component) => entity.Replace((T)component));
-#endif
+
 #if DEBUG
             if (!IsAutoReset && Type.GetInterface("IEcsAutoReset`1") != null)
             {
@@ -70,15 +69,10 @@ namespace Leopotam.Ecs
 #endif
         }
     }
-#if UNITY_EDITOR
+
     public static class EcsComponentTypesKeeper
     {
         public static EcsComponentKeepData[] EcsComponentKeepDatas;
-
-        static EcsComponentTypesKeeper()
-        {
-
-        }
 
         public static void Add(int typeIndex, string typeName, Action<EcsEntity, object> action)
         {
@@ -150,7 +144,6 @@ namespace Leopotam.Ecs
             return 0;
         }
     }
-#endif
 
     [Serializable]
     public class EcsComponentKeepData

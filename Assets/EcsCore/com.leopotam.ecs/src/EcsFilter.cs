@@ -370,8 +370,7 @@ namespace Leopotam.Ecs
 #if UNITY_2019_1_OR_NEWER
     [UnityEngine.Scripting.Preserve]
 #endif
-    public class EcsFilter<Inc1> : EcsFilter, IEcsComponentPoolResizeListener
-        where Inc1 : struct
+    public class EcsFilter<Inc1> : EcsFilter, IEcsComponentPoolResizeListener where Inc1 : struct
     {
         int[] _get1;
 
@@ -480,6 +479,8 @@ namespace Leopotam.Ecs
             ProcessListeners (false, entity);
 #endif
         }
+
+
 
         public class Exclude<Exc1> : EcsFilter<Inc1>
             where Exc1 : struct

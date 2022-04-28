@@ -18,7 +18,6 @@ namespace Game
                 .Add(new TapListenSystem())
                 .Add(new DestroyCubeSystem())
 
-
                 ;
 
             endFrame.OneFrame<OnScreenTapDown>()

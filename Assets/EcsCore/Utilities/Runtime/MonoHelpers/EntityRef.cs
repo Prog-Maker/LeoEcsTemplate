@@ -104,7 +104,6 @@ namespace Leopotam.Ecs
             internal string TypeName => _component.GetType().Name;
 
             [DisableContextMenu]
-            // [LabelText("$" + nameof(TypeName))]
             [HideLabel]
             [ShowInInspector]
             [HideReferenceObjectPicker]
