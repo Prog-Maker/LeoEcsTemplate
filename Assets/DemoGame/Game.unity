@@ -177,6 +177,68 @@ MonoBehaviour:
       type: {class: SpawnPoint, ns: Game, asm: Assembly-CSharp}
       data:
         Transform: {fileID: 212710140}
+--- !u!1 &237154458
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 237154459}
+  - component: {fileID: 237154460}
+  - component: {fileID: 237154461}
+  m_Layer: 0
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &237154459
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 237154458}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 794914782}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &237154460
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 237154458}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 14.131158, y: 7.834505, z: 5.976648}
+  m_Center: {x: 0, y: -3.4172525, z: 0.009993315}
+--- !u!54 &237154461
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 237154458}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &239844262
 GameObject:
   m_ObjectHideFlags: 0
@@ -424,8 +486,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 625590681}
-  - component: {fileID: 625590684}
-  - component: {fileID: 625590683}
   - component: {fileID: 625590682}
   m_Layer: 0
   m_Name: Spawner
@@ -458,38 +518,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 625590680}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e62ab82dee4bf24f884c9621992dc07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _ComponentFields:
-    Prefab: {fileID: 928783320580001869, guid: c7a4728754474214f88a14c7e5bfdc7a, type: 3}
-    ParentToSpawn: {fileID: 239844266}
---- !u!114 &625590683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 625590680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbda58328ed259f4fa740c6fbc1bfd12, type: 3}
+  m_Script: {fileID: 11500000, guid: e3265cc1a1b20e3419ef218a9a88b5b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IsNull: 1
---- !u!114 &625590684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 625590680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 863c7f7460b2b49abb4fa9a7ff9cb180, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ConvertMode: 0
+  _components:
+  - rid: 6330952329046523906
+  references:
+    version: 2
+    RefIds:
+    - rid: 6330952329046523906
+      type: {class: SpawnerAnyObject, ns: Game, asm: Assembly-CSharp}
+      data:
+        Prefab: {fileID: 928783320580001869, guid: c7a4728754474214f88a14c7e5bfdc7a,
+          type: 3}
+        ParentToSpawn: {fileID: 239844266}
 --- !u!1 &748593060
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,6 +651,59 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!1 &794914781
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 794914782}
+  - component: {fileID: 794914783}
+  m_Layer: 0
+  m_Name: Destroer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &794914782
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794914781}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -10.5, z: 4.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 237154459}
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &794914783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794914781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3265cc1a1b20e3419ef218a9a88b5b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsNull: 1
+  _components:
+  - rid: 6330952329046523911
+  references:
+    version: 2
+    RefIds:
+    - rid: 6330952329046523911
+      type: {class: Destroer, ns: Game, asm: Assembly-CSharp}
 --- !u!1 &1347459683
 GameObject:
   m_ObjectHideFlags: 0

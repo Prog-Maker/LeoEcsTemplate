@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace Game
 {
-    public class DestroyCubeSystem : IEcsRunSystem
+    public class DestroyGameobjectSystem : IEcsRunSystem
     {
-        EcsFilter<EnemyTag, DestroyTag, UnityViewComponent> _filterEnemiesToDestroy;
+        EcsFilter<DestroyTag, UnityViewComponent> _filterEnemiesToDestroy;
         
         void IEcsRunSystem.Run()
         {

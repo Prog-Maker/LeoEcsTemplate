@@ -16,8 +16,8 @@ namespace Game
                 .Add(new SpawnCubeSystem())
                 .Add(new MoveCubeSystem())
                 .Add(new TapListenSystem())
-                .Add(new DestroyCubeSystem())
-
+                .Add(new CubeCollisionCheck())
+                .Add(new DestroyGameobjectSystem())
                 ;
 
             endFrame.OneFrame<OnScreenTapDown>()

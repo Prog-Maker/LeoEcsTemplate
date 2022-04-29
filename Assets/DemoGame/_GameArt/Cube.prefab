@@ -12,12 +12,9 @@ GameObject:
   - component: {fileID: 928783320580001866}
   - component: {fileID: 928783320580001867}
   - component: {fileID: 928783320580001868}
-  - component: {fileID: 928783320580001862}
-  - component: {fileID: 928783320580001863}
-  - component: {fileID: 928783320580001864}
-  - component: {fileID: 928783320580001861}
-  - component: {fileID: 923877960443591701}
-  - component: {fileID: 819583468684799452}
+  - component: {fileID: 5873034856983473666}
+  - component: {fileID: 5235402213812317472}
+  - component: {fileID: 2430793031966455671}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -103,7 +100,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &928783320580001862
+--- !u!54 &5873034856983473666
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 928783320580001869}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &5235402213812317472
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,24 +125,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 928783320580001869}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 863c7f7460b2b49abb4fa9a7ff9cb180, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ConvertMode: 0
---- !u!114 &928783320580001863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 928783320580001869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbda58328ed259f4fa740c6fbc1bfd12, type: 3}
+  m_Script: {fileID: 11500000, guid: e3265cc1a1b20e3419ef218a9a88b5b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IsNull: 1
---- !u!114 &928783320580001864
+  _components:
+  - rid: 6330952329046523907
+  - rid: 6330952329046523908
+  - rid: 6330952329046523910
+  references:
+    version: 2
+    RefIds:
+    - rid: 6330952329046523907
+      type: {class: EnemyTag, ns: Game, asm: Assembly-CSharp}
+    - rid: 6330952329046523908
+      type: {class: Movable, ns: Game, asm: Assembly-CSharp}
+    - rid: 6330952329046523910
+      type: {class: SpeedComponent, ns: Game, asm: Assembly-CSharp}
+      data:
+        SpeedValue: 2
+--- !u!114 &2430793031966455671
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,47 +153,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 928783320580001869}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2104b362cf95d0f4189426c597e75637, type: 3}
+  m_Script: {fileID: 11500000, guid: cb86859428142ad498f0661f991407c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &928783320580001861
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 928783320580001869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 235ca674519d69344bcfe2731c17db86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _ComponentFields:
-    GameObject: {fileID: 928783320580001869}
-    Transform: {fileID: 928783320580001865}
---- !u!114 &923877960443591701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 928783320580001869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2b1fd45964249f4192a7619ace27d44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &819583468684799452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 928783320580001869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94b1c41f61b42ae47b2f61cb6cc8c53c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _ComponentFields:
-    SpeedValue: 2
