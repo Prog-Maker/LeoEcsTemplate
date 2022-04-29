@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Leopotam.Ecs;
 using UnityEngine;
 
@@ -13,24 +11,24 @@ namespace LeoEcsPhysics
         {
             var eventEntity = ecsWorld.NewEntity();
             ref var eventComponent = ref eventEntity.Get<OnTriggerEnterEvent>();
-            eventComponent.senderGameObject = senderGameObject;
-            eventComponent.collider = collider;
+            eventComponent.SenderGameObject = senderGameObject;
+            eventComponent.Collider = collider;
         }
 
         public static void RegisterTriggerStayEvent(GameObject senderGameObject, Collider collider)
         {
             var eventEntity = ecsWorld.NewEntity();
             ref var eventComponent = ref eventEntity.Get<OnTriggerStayEvent>();
-            eventComponent.senderGameObject = senderGameObject;
-            eventComponent.collider = collider;
+            eventComponent.SenderGameObject = senderGameObject;
+            eventComponent.Collider = collider;
         }
 
         public static void RegisterTriggerExitEvent(GameObject senderGameObject, Collider collider)
         {
             var eventEntity = ecsWorld.NewEntity();
             ref var eventComponent = ref eventEntity.Get<OnTriggerExitEvent>();
-            eventComponent.senderGameObject = senderGameObject;
-            eventComponent.collider = collider;
+            eventComponent.SenderGameObject = senderGameObject;
+            eventComponent.Collider = collider;
         }
 
         public static void RegisterCollisionEnterEvent(GameObject senderGameObject, Collider collider, ContactPoint firstContactPoint, Vector3 relativeVelocity)
