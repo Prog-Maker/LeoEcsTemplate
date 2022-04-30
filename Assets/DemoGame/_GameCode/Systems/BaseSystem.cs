@@ -47,7 +47,8 @@ namespace Game
         public T GetObject<T>(EcsFilter filter, int index) where T : struct
         {
             ref var entity =  ref filter.GetEntity(index);
-            return entity.Get<T>();
+            ref T comp = ref entity.Get<T>();
+            return comp;
         }
 
         public void DestroyEntity<T>(EcsFilter filter)
