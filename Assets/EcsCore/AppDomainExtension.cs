@@ -69,6 +69,32 @@ namespace Game
             return (from type in types.GetNonAbstractTypes<T>()
                     select (T)Activator.CreateInstance(type)).ToArray();
         }
+
+        private static Assembly _assembly = null;
+        public static object[] GetRegisteredTypes()
+        {
+            if (_assembly == null)
+            {
+                _assembly = AppDomain.CurrentDomain.Load("Assembly-CSharp");
+            }
+            
+            var allTypes = _assembly.GetAllTypes();
+
+            object[] result = null;
+
+            Type[] typesStruct =  allTypes.Where(type => type.IsValueType && !type.IsAbstract && type.Namespace == "Game").ToArray();
+
+            result = new object[typesStruct.Length];
+
+            int i = 0;
+            foreach (var type in typesStruct)
+            {
+                result[i] = Activator.CreateInstance(type);
+                i++;
+            }
+
+            return result;
+        }
     }
 
     public static class InterfaceTypeExtension

@@ -53,26 +53,24 @@ namespace Game
         {
             get
             {
-                //var types = AppDomainExtension.GetAllTypes(AppDomain.CurrentDomain);
-                // var allTypes = AppDomain.CurrentDomain.GetAssemblies().GetAllTypes();
+                //var assembly = AppDomain.CurrentDomain.Load("Assembly-CSharp");
+                //var allTypes = assembly.GetAllTypes();
 
-                var assembly = AppDomain.CurrentDomain.Load("Assembly-CSharp");
-                var allTypes = assembly.GetAllTypes();
+                //object[] result = null;
 
-                object[] result = null;
+                //Type[] typesStruct =  allTypes.Where(type => type.IsValueType && !type.IsAbstract && type.Namespace == "Game").ToArray();
 
-                Type[] typesStruct =  allTypes.Where(type => type.IsValueType && !type.IsAbstract && type.Namespace == "Game").ToArray();
+                //result = new object[typesStruct.Length];
 
-                result = new object[typesStruct.Length];
+                //int i = 0;
+                //foreach (var type in typesStruct)
+                //{
+                //    result[i] = Activator.CreateInstance(type);
+                //    i++;
+                //}
 
-                int i = 0;
-                foreach (var type in typesStruct)
-                {
-                    result[i] = Activator.CreateInstance(type);
-                    i++;
-                }
-
-                return result;
+                //return result;
+                return AppDomainExtension.GetRegisteredTypes();
             }
         }
 
