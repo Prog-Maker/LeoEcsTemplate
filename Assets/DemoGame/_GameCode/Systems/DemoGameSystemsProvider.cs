@@ -11,6 +11,7 @@ namespace Game
         public EcsSystems GetSystems(EcsWorld world, EcsSystems endFrame, EcsSystems mainSystems)
         {
             EcsSystems systems = new EcsSystems(world, this.name);
+            SharedData sharedData = new SharedData { PrefabsPath = "Items/{0}" };
 
             systems
                 .Add(new SpawnCubeSystem())
@@ -23,6 +24,7 @@ namespace Game
             endFrame.OneFrame<OnScreenTapDown>()
                 ;
 
+            systems.Inject(sharedData);
             return systems;
         }
     }

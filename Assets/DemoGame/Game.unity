@@ -699,11 +699,14 @@ MonoBehaviour:
   IsNull: 1
   _components:
   - rid: 6330952329046523911
+  - rid: 7125501701527175168
   references:
     version: 2
     RefIds:
     - rid: 6330952329046523911
       type: {class: Destroer, ns: Game, asm: Assembly-CSharp}
+    - rid: 7125501701527175168
+      type: {class: EnemyTag, ns: Game, asm: Assembly-CSharp}
 --- !u!1 &1347459683
 GameObject:
   m_ObjectHideFlags: 0
