@@ -2,12 +2,14 @@
 using Leopotam.Ecs;
 using System.Collections.Generic;
 using LeoEcsPhysics;
+using Game;
 
 namespace Modules.Root
 {
     public class EcsStartup : MonoBehaviour
     {
         [SerializeField] private List<UnityEngine.Object> _systemProviders;
+        [SerializeField] private SceneRefs _sceneRef;
 
         private EcsWorld _world;
         private EcsSystems _systems;
@@ -38,6 +40,7 @@ namespace Modules.Root
             
             _systems.Add(endFrame);
             _systems.Inject(new Utils.TimeService());
+            _systems.Inject(_sceneRef);
 
             _systems
                 .Init();
