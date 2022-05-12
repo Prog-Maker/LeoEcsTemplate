@@ -9,19 +9,18 @@ namespace Game
         
         void IEcsRunSystem.Run()
         {
-            foreach (var enemy in _filterEnemiesToDestroy)
+            _filterEnemiesToDestroy.ForEach(Destroy);
+        }
+
+        private void Destroy(ref EcsEntity entity)
+        {
+            if (entity.Has<UnityView>())
             {
-                var entity = _filterEnemiesToDestroy.GetEntity(enemy);
-
-                if (entity.Has<UnityView>())
-                {
-                    ref var view = ref entity.Get<UnityView>();
-
-                    Object.Destroy(view.GameObject);
-                }
-
-                entity.Destroy();
+                ref var view = ref entity.Get<UnityView>();
+                Object.Destroy(view.GameObject);
             }
+
+            entity.Destroy();
         }
     }
 }
