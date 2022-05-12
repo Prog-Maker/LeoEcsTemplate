@@ -5,7 +5,7 @@ namespace Game
 {
     public class DestroyGameobjectSystem : IEcsRunSystem
     {
-        EcsFilter<DestroyTag, UnityViewComponent> _filterEnemiesToDestroy;
+        EcsFilter<DestroyTag> _filterEnemiesToDestroy;
         
         void IEcsRunSystem.Run()
         {
@@ -13,9 +13,12 @@ namespace Game
             {
                 var entity = _filterEnemiesToDestroy.GetEntity(enemy);
 
-                ref var view = ref entity.Get<UnityViewComponent>();
+                if (entity.Has<UnityView>())
+                {
+                    ref var view = ref entity.Get<UnityView>();
 
-                Object.Destroy(view.GameObject);
+                    Object.Destroy(view.GameObject);
+                }
 
                 entity.Destroy();
             }
