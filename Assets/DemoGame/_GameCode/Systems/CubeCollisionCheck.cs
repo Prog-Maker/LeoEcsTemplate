@@ -1,5 +1,6 @@
 using LeoEcsPhysics;
 using Leopotam.Ecs;
+using UnityEngine;
 
 namespace Game
 {
@@ -20,7 +21,7 @@ namespace Game
             {
                 var entity = _enemies.GetEntity(idx);
 
-                var view = entity.Get<UnityViewComponent>();
+                var view = entity.Get<UnityView>();
 
                 var entityViewOnCollider = triggeredEvent.Collider.GetComponentInParent<EntityView>();
 
