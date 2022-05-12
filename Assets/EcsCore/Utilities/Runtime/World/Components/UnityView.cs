@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Leopotam.Ecs
 {
     [System.Serializable]
-    public struct UnityViewComponent
+    public struct UnityView
     {
         public GameObject GameObject;
         public Transform Transform;
