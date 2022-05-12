@@ -914,7 +914,6 @@ MonoBehaviour:
   _systemProviders:
   - {fileID: 11400000, guid: a4a5508c0a199014d9bb2177695c076b, type: 2}
   - {fileID: 11400000, guid: eb1a529658384cc42bce2396151da3dd, type: 2}
-  - {fileID: 11400000, guid: 61c6080b7d76bd74faf4c280f64c1264, type: 2}
   _sceneRef: {fileID: 787847596}
 --- !u!1 &1800231510
 GameObject:
