@@ -1,6 +1,6 @@
 namespace Leopotam.Ecs
 {
-    public class UnityViewComponentProvider : MonoProvider<UnityViewComponent>
+    public class UnityViewComponentProvider : MonoProvider<UnityView>
     {
 
     }

@@ -33,7 +33,7 @@ namespace Game
         private void Start()
         {
             Entity = WorldHandler.GetWorld().NewEntity();
-            ref var view = ref Entity.Get<UnityViewComponent>();
+            ref var view = ref Entity.Get<UnityView>();
             view.GameObject = gameObject;
             view.Transform = transform;
 
@@ -191,7 +191,7 @@ namespace Game
             internal Action<EcsEntity, object> _replaceAction;
             internal EcsEntity _entity;
 
-            internal bool notUnityViewComponent => _component.GetType() != typeof(UnityViewComponent);
+            internal bool notUnityViewComponent => _component.GetType() != typeof(UnityView);
 
             [HideLabel]
             [DisplayAsString(false)]

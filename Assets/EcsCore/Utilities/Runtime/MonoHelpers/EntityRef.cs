@@ -15,7 +15,7 @@ namespace Leopotam.Ecs
             if (!IsNull)
             {
                 Entity = WorldHandler.GetWorld().NewEntity();
-                ref var view = ref Entity.Get<UnityViewComponent>();
+                ref var view = ref Entity.Get<UnityView>();
                 view.GameObject = gameObject;
                 view.Transform = transform;
 

@@ -6,7 +6,7 @@ namespace Game
 {
     sealed class MoveCubeSystem : IEcsRunSystem
     {
-        EcsFilter<EnemyTag, Movable, SpeedComponent, UnityViewComponent> _enemyFilter;
+        EcsFilter<EnemyTag, Movable, SpeedComponent, UnityView> _enemyFilter;
 
         private SharedData sharedData;
 
@@ -18,7 +18,7 @@ namespace Game
                 
                 var entity = _enemyFilter.GetEntity(enemy);
 
-                ref var view = ref entity.Get<UnityViewComponent>();
+                ref var view = ref entity.Get<UnityView>();
                 ref var speed = ref entity.Get<SpeedComponent>();
 
                 view.Transform.Translate(-view.Transform.up * speed.SpeedValue * UnityEngine.Time.deltaTime);
